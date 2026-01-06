@@ -1,0 +1,19 @@
+---
+import Social from "../components/Social.astro";
+const plataform = "github";
+const username = "wihtastro";
+const socialmedia = ["x", "instagran", "facebook"];
+---
+
+<style>
+  footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>
+<footer>
+  <Social plataform="x" username="astrodotbuild" />
+  <Social plataform="github" username="withastro" />
+  <Social plataform="youtube" username="astrodotbuild" />
+</footer>
