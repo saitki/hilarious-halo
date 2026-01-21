@@ -44,14 +44,14 @@ jobs:
           passphrase: ${{ secrets.IONOS_SSH_PASSPHRASE }}
           port: ${{ secrets.IONOS_PORT }}
           script: |
-            if [ -d "www/staging.slensys.com.mx/public_html_backup" ]; then
-              rm -rf www/staging.slensys.com.mx/public_html_backup
+            if [ -d "/var/www/staging.slensys.com.mx/public_html_backup" ]; then
+              rm -rf /var/www/staging.slensys.com.mx/public_html_backup
             fi
-            if [ -d "www/staging.slensys.com.mx/public_html" ]; then
-              cp -r www/staging.slensys.com.mx/public_html www/staging.slensys.com.mx/public_html_backup
+            if [ -d "/var/www/staging.slensys.com.mx/public_html" ]; then
+              cp -r /var/www/staging.slensys.com.mx/public_html /var/www/staging.slensys.com.mx/public_html_backup
             fi
   
-            mkdir -p www/staging.slensys.com.mx/temp_deploy
+            mkdir -p /var/www/staging.slensys.com.mx/temp_deploy
 
       - name: Upload files
         uses: appleboy/scp-action@v0.1.4
@@ -62,7 +62,7 @@ jobs:
           passphrase: ${{ secrets.IONOS_SSH_PASSPHRASE }}
           port: ${{ secrets.IONOS_PORT }}
           source: "deploy.tar.gz"
-          target: "www/staging.slensys.com.mx/temp_deploy/"
+          target: "/var/www/staging.slensys.com.mx/temp_deploy/"
 
       - name: Extract files
         uses: appleboy/ssh-action@v0.1.7
@@ -74,7 +74,7 @@ jobs:
           port: ${{ secrets.IONOS_PORT }}
           script: |
             set -e
-            cd www/staging.slensys.com.mx/temp_deploy
+            cd /var/www/staging.slensys.com.mx/temp_deploy
             tar -xzf deploy.tar.gz
             rm deploy.tar.gz
             
